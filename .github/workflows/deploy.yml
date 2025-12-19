@@ -1,0 +1,57 @@
+name: Deploy Fullstack Shop
+
+# Kịch bản: Chỉ chạy khi có code mới đẩy vào nhánh main
+on:
+  push:
+    branches:
+      - main
+    # Chỉ chạy khi có thay đổi trong thư mục backend hoặc frontend
+    # (Sửa file README ở ngoài sẽ không kích hoạt để tiết kiệm)
+    paths:
+      - 'backend/**'
+      - 'frontend/**'
+
+jobs:
+  # Job 1: Xử lý Backend
+  deploy-backend:
+    runs-on: ubuntu-latest
+    # Chỉ chạy job này nếu có file trong thư mục backend bị sửa
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2 # Lấy lịch sử để so sánh file thay đổi
+
+      - name: Check for Backend changes
+        id: check_backend
+        run: |
+          # Kiểm tra xem có file nào trong folder 'backend' bị thay đổi không
+          git diff --name-only HEAD^ HEAD | grep '^backend/' && echo "changed=true" >> $GITHUB_OUTPUT || echo "changed=false" >> $GITHUB_OUTPUT
+
+      - name: Trigger Render Deploy (Backend)
+        if: steps.check_backend.outputs.changed == 'true'
+        run: |
+          echo "Phát hiện thay đổi ở Backend. Đang gọi Render..."
+          curl -X POST ${{ secrets.RENDER_BACKEND_HOOK }}
+
+  # Job 2: Xử lý Frontend
+  deploy-frontend:
+    runs-on: ubuntu-latest
+    # Chỉ chạy job này nếu có file trong thư mục frontend bị sửa
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Check for Frontend changes
+        id: check_frontend
+        run: |
+          # Kiểm tra xem có file nào trong folder 'frontend' bị thay đổi không
+          git diff --name-only HEAD^ HEAD | grep '^frontend/' && echo "changed=true" >> $GITHUB_OUTPUT || echo "changed=false" >> $GITHUB_OUTPUT
+
+      - name: Trigger Render Deploy (Frontend)
+        if: steps.check_frontend.outputs.changed == 'true'
+        run: |
+          echo "Phát hiện thay đổi ở Frontend. Đang gọi Render..."
+          curl -X POST ${{ secrets.RENDER_FRONTEND_HOOK }}
