@@ -5,12 +5,12 @@ function App() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3001/products')
+    // Thay localhost bằng link Render vừa có
+    fetch('https://shop-api-nhatky.onrender.com/products') 
       .then(response => response.json())
       .then(data => setProducts(data))
       .catch(error => console.error('Lỗi kết nối:', error));
   }, []);
-
   return (
     <div className="App">
       {/* Header đẹp mắt */}
