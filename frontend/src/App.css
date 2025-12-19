@@ -1,0 +1,90 @@
+/* App.css - Trang trí giao diện */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f6f8; /* Màu nền xám nhẹ hiện đại */
+}
+
+/* Thanh menu trên cùng */
+.header {
+  background: linear-gradient(90deg, #ff512f, #dd2476); /* Màu gradient cam-hồng */
+  color: white;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.container {
+  max-width: 1000px;
+  margin: 30px auto; /* Căn giữa màn hình */
+  padding: 0 20px;
+}
+
+/* Lưới sản phẩm (Grid) */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Tự động chia cột */
+  gap: 25px; /* Khoảng cách giữa các thẻ */
+}
+
+/* Thẻ sản phẩm (Card) */
+.product-card {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Hiệu ứng khi di chuột vào thẻ */
+.product-card:hover {
+  transform: translateY(-10px); /* Bay lên nhẹ */
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+/* Phần hình ảnh giả lập */
+.product-image {
+  height: 200px;
+  background-color: #ddd;
+  background-image: url('https://placehold.co/600x400/png?text=Smart+Phone'); /* Ảnh demo */
+  background-size: cover;
+  background-position: center;
+}
+
+.product-info {
+  padding: 20px;
+  text-align: center;
+}
+
+.product-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 10px 0;
+  color: #333;
+}
+
+.product-price {
+  color: #dd2476;
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  display: block;
+}
+
+/* Nút bấm mua hàng */
+.buy-btn {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.buy-btn:hover {
+  background-color: #dd2476; /* Đổi màu khi di chuột */
+}
