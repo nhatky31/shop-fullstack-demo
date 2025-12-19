@@ -15,7 +15,7 @@ function App() {
     <div className="App">
       {/* Header đẹp mắt */}
       <header className="header">
-        <h1>📱 TechStore Pro</h1>
+        <h1>📱 TechStore </h1>
         <p>Cửa hàng công nghệ Demo React + Node.js</p>
       </header>
 
